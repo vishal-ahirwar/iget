@@ -61,7 +61,7 @@ int main(int argc, char **argv)
     if (argc < 3)
     {
         Screen screen = Screen(100, 3);
-        Render(screen, border(text("here is how to use it : ll url outputfilename.zip")));
+        Render(screen, border(text("here is how to use it : get url outputfilename.zip")));
         screen.Print();
         std::cout << std::endl;
         return 0;
