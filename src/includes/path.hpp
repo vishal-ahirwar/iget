@@ -11,10 +11,6 @@ void generatePath(const std::string &path)
         std::string temp=path.substr(0,valid_path);
         std::filesystem::create_directories(temp);
     }
-    else
-    {
-        fprintf(stderr,"Invalid path\n");
-    };
 };
 
 #endif
