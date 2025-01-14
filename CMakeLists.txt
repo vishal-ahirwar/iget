@@ -22,3 +22,12 @@ install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 #@link
 target_link_libraries(${PROJECT_NAME} ftxui::ftxui)
 target_link_libraries(${PROJECT_NAME} cpr::cpr)
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
+set(CPACK_PACKAGE_VENDOR "Vishal Ahirwar")
+include(CPack)#Unit Testing CMake Section
+find_package(Catch2)
+add_executable(tests ./tests/main.cc)
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)

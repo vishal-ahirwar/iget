@@ -5,7 +5,9 @@
 #include <ftxui/screen/screen.hpp> // for Screen
 #include "ftxui/dom/node.hpp"      // for Render
 #include "ftxui/screen/color.hpp"  // for ftxui
+#include<path.hpp>
 using namespace ftxui;
+
 void download_file(const std::string &url, const std::string &output_file)
 {
     std::string reset_position;
@@ -36,7 +38,7 @@ void download_file(const std::string &url, const std::string &output_file)
         if (response.status_code == 200)
         {
             std::cout << "\nDownload successful! Saving to " << output_file << "\n";
-
+            generatePath(output_file);
             // Write the response body to the output file
             std::ofstream file(output_file, std::ios::binary);
             file.write(response.text.c_str(), response.text.size());
