@@ -5,27 +5,16 @@
 #include <filesystem>
 void generatePath(const std::string &path)
 {
-    std::vector<std::string> directories;
-    std::string directory;
-    for (char i : path)
+    auto valid_path=path.find_last_of("/");
+    if(valid_path!=std::string::npos)
     {
-        if (i == '/' || i == '\\')
-        {
-            directories.push_back(directory);
-            directory += i;
-        }
-        else
-        {
-            directory += i;
-        }
-    };
-    for (const auto &dir : directories)
-    {
-        if (!std::filesystem::exists(dir))
-        {
-            std::filesystem::create_directory(dir);
-        }
+        std::string temp=path.substr(0,valid_path);
+        std::filesystem::create_directories(temp);
     }
+    else
+    {
+        fprintf(stderr,"Invalid path\n");
+    };
 };
 
 #endif
