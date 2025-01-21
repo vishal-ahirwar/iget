@@ -1,6 +1,5 @@
 [requires]
 catch2/3.7.1
-ftxui/5.0.0
 
 [generators]
 CMakeDeps
