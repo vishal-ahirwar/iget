@@ -3,29 +3,22 @@
 #Copyright 2023 Vishal Ahirwar. #replace with your copyright notice.
 cmake_minimum_required(VERSION 3.6...3.31)
 project(get VERSION 1.0.0 LANGUAGES CXX)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(BUILD_SHARED_LIBS OFF)
-# set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
-include_directories(src)
-#@find
-include(FetchContent)
-FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
-                         GIT_TAG dec9422db3af470641f8b0d90e4b451c4daebf64) # Replace with your desired git commit from: https://github.com/libcpr/cpr/releases
-FetchContent_MakeAvailable(cpr)
-
-set(SOURCE ./src/main.cc)#add your additional source file here!
-add_executable(${PROJECT_NAME} ${SOURCE})
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -funroll-loops")
+set(COMPANY "@DeveloperName")
+string(TIMESTAMP CURRENT_YEAR "%Y")
+set(COPYRIGHT "Copyright(c) ${CURRENT_YEAR} ${COMPANY}.")
+include_directories(src ${CMAKE_BINARY_DIR})
+configure_file(getconfig.h.in getconfig.h)
+#@find Warning: Do not remove this line
+add_subdirectory(external/cpr)
+add_subdirectory(external/fmt)
+file(GLOB SOURCES "src/*.cpp" "src/*.hpp" "src/*.hxx" "src/*.h" "src/*.cc" "src/*.cxx")
+add_executable(${PROJECT_NAME} ${SOURCES})
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-#@link
-target_link_libraries(${PROJECT_NAME} cpr::cpr)
-include(InstallRequiredSystemLibraries)
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
-set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
-set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
-set(CPACK_PACKAGE_VENDOR "Vishal Ahirwar")
-include(CPack)#Unit Testing CMake Section
-find_package(Catch2)
-add_executable(tests ./tests/main.cc)
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+#@link Warning: Do not remove this line
+target_link_libraries(${PROJECT_NAME} cpr::cpr fmt::fmt)

@@ -11,6 +11,4 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 build
-*.bin
-.vscode/settings.json
-CMakeUserPresets.json
+__pycache__
