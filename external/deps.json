@@ -1,0 +1,5 @@
+{
+    "cmakeArgs":[
+        "-DBUILD_SHARED_LIBS=OFF"
+    ]
+}
