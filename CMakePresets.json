@@ -14,8 +14,7 @@
       "inherits": "vcpkg",
       "cacheVariables": {
         "VCPKG_TARGET_TRIPLET": "x64-windows-static",
-        "CMAKE_CXX_COMPILER":"clang++",
-        "CMAKE_C_COMPILER":"clang"
+        "CMAKE_CXX_COMPILER":"clang-cl"
       }
     },
     {
