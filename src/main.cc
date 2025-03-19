@@ -32,7 +32,7 @@ void download_file(const std::string &url, const std::string &output_file)
         }
         else
         {
-            fmt::print(fmt::emphasis::bold,"{:<8}: ","Info");
+            fmt::print(fmt::emphasis::bold,"\n{:<8}: ","Info");
             fmt::print(fmt::emphasis::faint | fmt::fg(fmt::color::red), " Failed to download file. HTTP status code: {}\n", response.status_code);
         }
     }
